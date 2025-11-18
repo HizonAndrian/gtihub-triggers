@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        desciption: 'Type "destroy" to confirm this run'
+        description: 'Type "destroy" to confirm this run'
+        id: confirmation
         required: true
         default: 'Cancel'
 
