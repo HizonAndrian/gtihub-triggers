@@ -1,0 +1,35 @@
+#Github action for push triggers
+name: "GitAct Push Triggers"
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.5.6
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Validate Terraform
+      run: terraform validate
+
+    - name: Format Terraform
+      run: terraform fmt -check
+
+    - name: Plan Terraform
+      run: terraform plan
