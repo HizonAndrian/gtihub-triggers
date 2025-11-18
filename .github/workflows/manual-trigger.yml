@@ -1,0 +1,26 @@
+name: Manual Trigger (Workflow Dispatch)
+
+on:
+  workflow_dispatch:
+
+env:
+  TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+
+jobs:
+  manual-trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get source code.
+        uses: actions/checkout@v3
+
+      - name: Install terraform
+        uses: hashicorp/setup-terraform_version@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Initialize terraform
+        run: terraform init
+
+      - name: Destroy current state
+        run: terraform destroy -auto-approve
