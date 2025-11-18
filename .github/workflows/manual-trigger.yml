@@ -2,11 +2,11 @@ name: Manual Trigger (Workflow Dispatch)
 
 on:
   workflow_dispatch:
-  inputs:
-    confirmation:
-      desciption: 'Type "destroy" to confirm this run'
-      required: true
-      default: 'Cancel'
+    inputs:
+      confirmation:
+        desciption: 'Type "destroy" to confirm this run'
+        required: true
+        default: 'Cancel'
 
 env:
   TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
