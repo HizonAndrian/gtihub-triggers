@@ -5,7 +5,6 @@ on:
     inputs:
       confirmation:
         description: 'Type "destroy" to confirm this run'
-        id: confirmation
         required: true
         default: 'Cancel'
 
@@ -27,6 +26,12 @@ jobs:
 
       - name: Initialize terraform
         run: terraform init
+
+      - name: Check inputs
+        if: ${{ github.event.inputs.confirmation != 'destroy'}}
+        run: |
+          echo "Confirmation input not received. Exiting workflow."
+          exit 1
 
       - name: Destroy current state
         run: terraform destroy -auto-approve
