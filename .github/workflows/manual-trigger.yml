@@ -31,6 +31,7 @@ jobs:
         if: ${{ github.event.inputs.confirmation != 'destroy'}}
         run: |
           echo "Confirmation input not received. Exiting workflow."
+          echo ${{ github.ref_name }}
           exit 1
 
       - name: Destroy current state
